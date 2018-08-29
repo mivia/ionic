@@ -1,0 +1,48 @@
+<table class="table" cdk-table [dataSource]="tableDataSource$">
+  <ng-container cdkColumnDef="id">
+    <th cdk-header-cell *cdkHeaderCellDef> Band ID </th>
+    <td cdk-cell *cdkCellDef="let band"> {{band.id}} </td>
+  </ng-container>
+  <ng-container cdkColumnDef="name">
+    <th cdk-header-cell *cdkHeaderCellDef> Band name </th>
+    <td cdk-cell *cdkCellDef="let band"> {{band.name}} </td>
+  </ng-container>
+  <ng-container cdkColumnDef="actions">
+    <th cdk-header-cell *cdkHeaderCellDef> Actions </th>
+    <td cdk-cell *cdkCellDef="let band">
+      <i class="material-icons" (click)="deleteBand(band.id)">
+        delete_forever
+      </i>
+    </td>
+  </ng-container>
+  <ng-container cdkColumnDef="rating">
+    <th cdk-header-cell *cdkHeaderCellDef> Rating </th>
+    <td cdk-cell *cdkCellDef="let band" class="rate-cell">
+      <i class="material-icons rate-icon" (click)="rateUp(band.id)">
+        add
+      </i>
+      <span id="rating">{{band.rating}}</span>
+      <i class="material-icons rate-icon" (click)="rateDown(band.id)">
+        remove
+      </i>
+    </td> 
+  </ng-container>
+  <ng-container cdkColumnDef="stars">
+    <th cdk-header-cell *cdkHeaderCellDef> Stars </th>
+    <td cdk-cell *cdkCellDef="let band">
+      <ng-container *ngFor="let star of ratingStars[band.id].full">
+        <i class="material-icons icon--gold">
+          grade
+        </i>
+      </ng-container>
+      <ng-container *ngFor="let star of ratingStars[band.id].empty">
+        <i class="material-icons">
+          star_border
+        </i>
+      </ng-container>
+    </td>
+  </ng-container>
+  <tr cdk-header-row *cdkHeaderRowDef="displayedColumns$.value"></tr>
+  <tr cdk-row *cdkRowDef="let row; columns: displayedColumns$.value"></tr>
+</table>
+<button (click)="resetTable()">Reset table</button>

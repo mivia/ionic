@@ -1,0 +1,16 @@
+#rating {
+    position: relative;
+    bottom: 5px;    
+}
+
+.rate-icon {
+    cursor: pointer;
+}
+
+.table {
+    margin: 50px auto;
+}
+
+.icon--gold {
+    color: #FFD700;
+}
